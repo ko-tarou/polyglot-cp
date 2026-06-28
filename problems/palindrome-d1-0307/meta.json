@@ -1,0 +1,23 @@
+{
+  "id": "palindrome-d1-0307",
+  "title": "回文判定",
+  "topic": "string",
+  "difficulty": 1,
+  "tags": [
+    "check"
+  ],
+  "samples": [
+    {
+      "input": "level\n",
+      "output": "Yes"
+    },
+    {
+      "input": "abc\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

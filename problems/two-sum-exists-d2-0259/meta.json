@@ -1,0 +1,24 @@
+{
+  "id": "two-sum-exists-d2-0259",
+  "title": "2 数の和が K になるか",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "search",
+    "set"
+  ],
+  "samples": [
+    {
+      "input": "2 3\n1 2\n",
+      "output": "Yes"
+    },
+    {
+      "input": "2 100\n1 2\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "manhattan-d1-0421",
+  "title": "マンハッタン距離",
+  "topic": "geometry",
+  "difficulty": 1,
+  "tags": [
+    "distance"
+  ],
+  "samples": [
+    {
+      "input": "0 0 0 0\n",
+      "output": "0"
+    },
+    {
+      "input": "1 2 4 6\n",
+      "output": "7"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

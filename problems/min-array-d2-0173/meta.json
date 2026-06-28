@@ -1,0 +1,23 @@
+{
+  "id": "min-array-d2-0173",
+  "title": "配列の最小値",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "aggregate"
+  ],
+  "samples": [
+    {
+      "input": "1\n0\n",
+      "output": "0"
+    },
+    {
+      "input": "3\n5 1 9\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

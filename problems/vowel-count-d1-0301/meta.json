@@ -1,0 +1,23 @@
+{
+  "id": "vowel-count-d1-0301",
+  "title": "母音の数",
+  "topic": "string",
+  "difficulty": 1,
+  "tags": [
+    "count"
+  ],
+  "samples": [
+    {
+      "input": "aeiou\n",
+      "output": "5"
+    },
+    {
+      "input": "xyz\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

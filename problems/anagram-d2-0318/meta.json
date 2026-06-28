@@ -1,0 +1,24 @@
+{
+  "id": "anagram-d2-0318",
+  "title": "アナグラム判定",
+  "topic": "string",
+  "difficulty": 2,
+  "tags": [
+    "check",
+    "count"
+  ],
+  "samples": [
+    {
+      "input": "listen\nsilent\n",
+      "output": "Yes"
+    },
+    {
+      "input": "abc\nabd\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

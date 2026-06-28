@@ -1,0 +1,23 @@
+{
+  "id": "run-length-d3-0328",
+  "title": "ランレングス圧縮",
+  "topic": "string",
+  "difficulty": 3,
+  "tags": [
+    "encode"
+  ],
+  "samples": [
+    {
+      "input": "aaabbc\n",
+      "output": "a3b2c1"
+    },
+    {
+      "input": "abc\n",
+      "output": "a1b1c1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

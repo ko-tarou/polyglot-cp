@@ -1,0 +1,23 @@
+{
+  "id": "count-even-odd-d3-0188",
+  "title": "偶数と奇数の個数",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "count"
+  ],
+  "samples": [
+    {
+      "input": "1\n2\n",
+      "output": "1 0"
+    },
+    {
+      "input": "1\n3\n",
+      "output": "0 1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

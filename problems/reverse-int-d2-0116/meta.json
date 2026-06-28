@@ -1,0 +1,23 @@
+{
+  "id": "reverse-int-d2-0116",
+  "title": "整数の桁反転",
+  "topic": "math",
+  "difficulty": 2,
+  "tags": [
+    "digit"
+  ],
+  "samples": [
+    {
+      "input": "0\n",
+      "output": "0"
+    },
+    {
+      "input": "120\n",
+      "output": "21"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

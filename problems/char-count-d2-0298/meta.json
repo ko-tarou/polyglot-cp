@@ -1,0 +1,23 @@
+{
+  "id": "char-count-d2-0298",
+  "title": "指定文字の出現回数",
+  "topic": "string",
+  "difficulty": 2,
+  "tags": [
+    "count"
+  ],
+  "samples": [
+    {
+      "input": "banana\na\n",
+      "output": "3"
+    },
+    {
+      "input": "abc\nz\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

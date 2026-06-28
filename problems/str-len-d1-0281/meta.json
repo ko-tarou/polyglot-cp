@@ -1,0 +1,23 @@
+{
+  "id": "str-len-d1-0281",
+  "title": "文字列の長さ",
+  "topic": "string",
+  "difficulty": 1,
+  "tags": [
+    "basic"
+  ],
+  "samples": [
+    {
+      "input": "a\n",
+      "output": "1"
+    },
+    {
+      "input": "abc\n",
+      "output": "3"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

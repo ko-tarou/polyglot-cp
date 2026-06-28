@@ -1,0 +1,24 @@
+{
+  "id": "kth-smallest-d2-0219",
+  "title": "K 番目に小さい値",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "sort",
+    "select"
+  ],
+  "samples": [
+    {
+      "input": "1 1\n5\n",
+      "output": "5"
+    },
+    {
+      "input": "3 2\n3 1 2\n",
+      "output": "2"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

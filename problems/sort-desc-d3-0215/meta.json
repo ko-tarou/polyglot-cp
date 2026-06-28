@@ -1,0 +1,23 @@
+{
+  "id": "sort-desc-d3-0215",
+  "title": "降順ソート",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "sort"
+  ],
+  "samples": [
+    {
+      "input": "1\n0\n",
+      "output": "0"
+    },
+    {
+      "input": "3\n1 3 2\n",
+      "output": "3 2 1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

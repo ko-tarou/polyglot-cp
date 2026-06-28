@@ -1,0 +1,23 @@
+{
+  "id": "is-prime-d2-0078",
+  "title": "素数判定",
+  "topic": "math",
+  "difficulty": 2,
+  "tags": [
+    "number-theory"
+  ],
+  "samples": [
+    {
+      "input": "2\n",
+      "output": "Yes"
+    },
+    {
+      "input": "4\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

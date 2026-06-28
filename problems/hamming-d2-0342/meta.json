@@ -1,0 +1,23 @@
+{
+  "id": "hamming-d2-0342",
+  "title": "ハミング距離",
+  "topic": "string",
+  "difficulty": 2,
+  "tags": [
+    "compare"
+  ],
+  "samples": [
+    {
+      "input": "abc\nabd\n",
+      "output": "1"
+    },
+    {
+      "input": "aaa\naaa\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

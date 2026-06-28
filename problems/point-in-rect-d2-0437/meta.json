@@ -1,0 +1,23 @@
+{
+  "id": "point-in-rect-d2-0437",
+  "title": "点が長方形の内部か",
+  "topic": "geometry",
+  "difficulty": 2,
+  "tags": [
+    "check"
+  ],
+  "samples": [
+    {
+      "input": "0 0 10 10\n5 5\n",
+      "output": "Yes"
+    },
+    {
+      "input": "0 0 10 10\n20 5\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

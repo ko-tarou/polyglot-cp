@@ -1,0 +1,23 @@
+{
+  "id": "min-max-range-d2-0490",
+  "title": "最大値と最小値の差",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "aggregate"
+  ],
+  "samples": [
+    {
+      "input": "1\n5\n",
+      "output": "0"
+    },
+    {
+      "input": "3\n1 5 3\n",
+      "output": "4"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

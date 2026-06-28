@@ -1,0 +1,23 @@
+{
+  "id": "leap-year-d1-0479",
+  "title": "うるう年判定",
+  "topic": "simulation",
+  "difficulty": 1,
+  "tags": [
+    "branch"
+  ],
+  "samples": [
+    {
+      "input": "2000\n",
+      "output": "Yes"
+    },
+    {
+      "input": "1900\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

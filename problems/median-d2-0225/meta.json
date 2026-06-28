@@ -1,0 +1,24 @@
+{
+  "id": "median-d2-0225",
+  "title": "中央値",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "sort",
+    "stats"
+  ],
+  "samples": [
+    {
+      "input": "1\n7\n",
+      "output": "7"
+    },
+    {
+      "input": "3\n3 1 2\n",
+      "output": "2"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

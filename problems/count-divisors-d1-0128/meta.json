@@ -1,0 +1,23 @@
+{
+  "id": "count-divisors-d1-0128",
+  "title": "約数の個数",
+  "topic": "math",
+  "difficulty": 1,
+  "tags": [
+    "number-theory"
+  ],
+  "samples": [
+    {
+      "input": "1\n",
+      "output": "1"
+    },
+    {
+      "input": "12\n",
+      "output": "6"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

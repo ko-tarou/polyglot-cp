@@ -1,0 +1,23 @@
+{
+  "id": "grade-d1-0475",
+  "title": "点数から評価",
+  "topic": "simulation",
+  "difficulty": 1,
+  "tags": [
+    "branch"
+  ],
+  "samples": [
+    {
+      "input": "90\n",
+      "output": "A"
+    },
+    {
+      "input": "0\n",
+      "output": "D"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

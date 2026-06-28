@@ -1,0 +1,23 @@
+{
+  "id": "abs-diff-d1-0486",
+  "title": "差の絶対値",
+  "topic": "math",
+  "difficulty": 1,
+  "tags": [
+    "arithmetic"
+  ],
+  "samples": [
+    {
+      "input": "0 0\n",
+      "output": "0"
+    },
+    {
+      "input": "5 3\n",
+      "output": "2"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

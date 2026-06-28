@@ -1,0 +1,23 @@
+{
+  "id": "str-upper-d1-0292",
+  "title": "大文字に変換",
+  "topic": "string",
+  "difficulty": 1,
+  "tags": [
+    "basic"
+  ],
+  "samples": [
+    {
+      "input": "a\n",
+      "output": "A"
+    },
+    {
+      "input": "abc\n",
+      "output": "ABC"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

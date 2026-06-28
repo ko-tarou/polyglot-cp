@@ -1,0 +1,24 @@
+{
+  "id": "count-greater-d2-0269",
+  "title": "閾値より大きい要素数",
+  "topic": "array",
+  "difficulty": 2,
+  "tags": [
+    "count",
+    "threshold"
+  ],
+  "samples": [
+    {
+      "input": "1 0\n5\n",
+      "output": "1"
+    },
+    {
+      "input": "3 5\n1 2 3\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

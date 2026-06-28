@@ -1,0 +1,24 @@
+{
+  "id": "double-n-d1-0014",
+  "title": "N を 2 倍",
+  "topic": "math",
+  "difficulty": 1,
+  "tags": [
+    "arithmetic",
+    "io"
+  ],
+  "samples": [
+    {
+      "input": "0\n",
+      "output": "0"
+    },
+    {
+      "input": "1\n",
+      "output": "2"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

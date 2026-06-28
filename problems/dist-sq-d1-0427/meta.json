@@ -1,0 +1,23 @@
+{
+  "id": "dist-sq-d1-0427",
+  "title": "2 点間距離の 2 乗",
+  "topic": "geometry",
+  "difficulty": 1,
+  "tags": [
+    "distance"
+  ],
+  "samples": [
+    {
+      "input": "0 0 3 4\n",
+      "output": "25"
+    },
+    {
+      "input": "1 1 1 1\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "dot-product-d2-0454",
+  "title": "ベクトルの内積",
+  "topic": "matrix",
+  "difficulty": 2,
+  "tags": [
+    "vector"
+  ],
+  "samples": [
+    {
+      "input": "2\n1 2\n3 4\n",
+      "output": "11"
+    },
+    {
+      "input": "14\n122 -57 438 163 -736 -591 -81 63 -664 -448 -207 -629 -906 -397\n694 -538 138 368 642 -809 -970 703 105 -347 -749 527 35 -310\n",
+      "output": "364884"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

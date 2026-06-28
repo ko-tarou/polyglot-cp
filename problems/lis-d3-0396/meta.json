@@ -1,0 +1,24 @@
+{
+  "id": "lis-d3-0396",
+  "title": "最長増加部分列",
+  "topic": "dp",
+  "difficulty": 3,
+  "tags": [
+    "dp",
+    "sequence"
+  ],
+  "samples": [
+    {
+      "input": "5\n1 3 2 4 3\n",
+      "output": "3"
+    },
+    {
+      "input": "1\n5\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "matrix-diag-d1-0439",
+  "title": "正方行列の対角成分の和",
+  "topic": "matrix",
+  "difficulty": 1,
+  "tags": [
+    "matrix",
+    "sum"
+  ],
+  "samples": [
+    {
+      "input": "2\n1 2\n3 4\n",
+      "output": "5"
+    },
+    {
+      "input": "7\n754 -213 6 948 525 706 719\n108 -771 -229 318 -111 -250 264\n646 -393 -444 702 -933 872 121\n374 893 686 -891 -3 -378 -239\n-294 -992 845 98 786 205 -915\n-574 -407 987 -222 -591 -181 978\n-762 358 -43 -548 -939 -425 -621\n",
+      "output": "-1368"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

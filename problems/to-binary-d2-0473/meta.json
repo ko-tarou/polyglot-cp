@@ -1,0 +1,24 @@
+{
+  "id": "to-binary-d2-0473",
+  "title": "10 進数を 2 進数に変換",
+  "topic": "simulation",
+  "difficulty": 2,
+  "tags": [
+    "bit",
+    "base"
+  ],
+  "samples": [
+    {
+      "input": "0\n",
+      "output": "0"
+    },
+    {
+      "input": "1\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

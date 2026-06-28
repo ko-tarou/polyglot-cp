@@ -1,0 +1,23 @@
+{
+  "id": "caesar-d2-0335",
+  "title": "シーザー暗号",
+  "topic": "string",
+  "difficulty": 2,
+  "tags": [
+    "cipher"
+  ],
+  "samples": [
+    {
+      "input": "abc\n1\n",
+      "output": "bcd"
+    },
+    {
+      "input": "xyz\n3\n",
+      "output": "abc"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

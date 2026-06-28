@@ -1,0 +1,23 @@
+{
+  "id": "str-reverse-d1-0286",
+  "title": "文字列の反転",
+  "topic": "string",
+  "difficulty": 1,
+  "tags": [
+    "basic"
+  ],
+  "samples": [
+    {
+      "input": "a\n",
+      "output": "a"
+    },
+    {
+      "input": "abcde\n",
+      "output": "edcba"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

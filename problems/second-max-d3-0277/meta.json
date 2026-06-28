@@ -1,0 +1,23 @@
+{
+  "id": "second-max-d3-0277",
+  "title": "2 番目に大きい値",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "aggregate"
+  ],
+  "samples": [
+    {
+      "input": "1\n5\n",
+      "output": "-1"
+    },
+    {
+      "input": "3\n2 2 2\n",
+      "output": "-1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "divisor-sum-d2-0141",
+  "title": "約数の総和",
+  "topic": "math",
+  "difficulty": 2,
+  "tags": [
+    "number-theory"
+  ],
+  "samples": [
+    {
+      "input": "1\n",
+      "output": "1"
+    },
+    {
+      "input": "6\n",
+      "output": "12"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

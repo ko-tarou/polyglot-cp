@@ -1,0 +1,24 @@
+{
+  "id": "count-pairs-target-d2-0356",
+  "title": "和が K になる組の数",
+  "topic": "search",
+  "difficulty": 2,
+  "tags": [
+    "count",
+    "two-pointer"
+  ],
+  "samples": [
+    {
+      "input": "4 4\n1 3 2 2\n",
+      "output": "2"
+    },
+    {
+      "input": "3 100\n1 2 3\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

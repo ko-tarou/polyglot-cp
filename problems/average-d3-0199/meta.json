@@ -1,0 +1,24 @@
+{
+  "id": "average-d3-0199",
+  "title": "平均値 (小数第 2 位)",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "aggregate",
+    "float"
+  ],
+  "samples": [
+    {
+      "input": "1\n5\n",
+      "output": "5.00"
+    },
+    {
+      "input": "2\n1 2\n",
+      "output": "1.50"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

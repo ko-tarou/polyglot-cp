@@ -1,0 +1,23 @@
+{
+  "id": "collatz-d3-0125",
+  "title": "コラッツ数列の長さ",
+  "topic": "math",
+  "difficulty": 3,
+  "tags": [
+    "simulation"
+  ],
+  "samples": [
+    {
+      "input": "1\n",
+      "output": "0"
+    },
+    {
+      "input": "2\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

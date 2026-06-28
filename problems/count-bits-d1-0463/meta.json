@@ -1,0 +1,23 @@
+{
+  "id": "count-bits-d1-0463",
+  "title": "立っているビットの数",
+  "topic": "simulation",
+  "difficulty": 1,
+  "tags": [
+    "bit"
+  ],
+  "samples": [
+    {
+      "input": "0\n",
+      "output": "0"
+    },
+    {
+      "input": "7\n",
+      "output": "3"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "edit-distance-d3-0375",
+  "title": "編集距離",
+  "topic": "dp",
+  "difficulty": 3,
+  "tags": [
+    "dp",
+    "string"
+  ],
+  "samples": [
+    {
+      "input": "kitten\nsitting\n",
+      "output": "3"
+    },
+    {
+      "input": "abc\nabc\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

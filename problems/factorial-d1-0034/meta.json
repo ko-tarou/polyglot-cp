@@ -1,0 +1,24 @@
+{
+  "id": "factorial-d1-0034",
+  "title": "階乗 N!",
+  "topic": "math",
+  "difficulty": 1,
+  "tags": [
+    "bignum",
+    "loop"
+  ],
+  "samples": [
+    {
+      "input": "0\n",
+      "output": "1"
+    },
+    {
+      "input": "1\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "gcd-array-d3-0257",
+  "title": "配列全体の最大公約数",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "number-theory",
+    "aggregate"
+  ],
+  "samples": [
+    {
+      "input": "1\n7\n",
+      "output": "7"
+    },
+    {
+      "input": "3\n12 18 24\n",
+      "output": "6"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

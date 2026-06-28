@@ -1,0 +1,24 @@
+{
+  "id": "lcs-d3-0370",
+  "title": "最長共通部分列",
+  "topic": "dp",
+  "difficulty": 3,
+  "tags": [
+    "dp",
+    "string"
+  ],
+  "samples": [
+    {
+      "input": "abcde\nace\n",
+      "output": "3"
+    },
+    {
+      "input": "abc\nxyz\n",
+      "output": "0"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

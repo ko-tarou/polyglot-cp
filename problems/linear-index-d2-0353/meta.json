@@ -1,0 +1,23 @@
+{
+  "id": "linear-index-d2-0353",
+  "title": "線形探索 (最初の位置)",
+  "topic": "search",
+  "difficulty": 2,
+  "tags": [
+    "linear"
+  ],
+  "samples": [
+    {
+      "input": "3 2\n1 2 3\n",
+      "output": "2"
+    },
+    {
+      "input": "3 9\n1 2 3\n",
+      "output": "-1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

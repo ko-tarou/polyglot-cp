@@ -1,0 +1,24 @@
+{
+  "id": "add-two-d3-0009",
+  "title": "A + B",
+  "topic": "math",
+  "difficulty": 3,
+  "tags": [
+    "arithmetic",
+    "io"
+  ],
+  "samples": [
+    {
+      "input": "0 0\n",
+      "output": "0"
+    },
+    {
+      "input": "1000000 1000000\n",
+      "output": "2000000"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

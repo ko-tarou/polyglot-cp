@@ -1,0 +1,24 @@
+{
+  "id": "prefix-sum-d3-0243",
+  "title": "区間和クエリ",
+  "topic": "array",
+  "difficulty": 3,
+  "tags": [
+    "prefix-sum",
+    "query"
+  ],
+  "samples": [
+    {
+      "input": "3 1\n1 2 3\n1 3\n",
+      "output": "6"
+    },
+    {
+      "input": "1 1\n5\n1 1\n",
+      "output": "5"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

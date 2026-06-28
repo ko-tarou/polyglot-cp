@@ -1,0 +1,24 @@
+{
+  "id": "power-mod-d2-0094",
+  "title": "べき乗の剰余 A^B mod M",
+  "topic": "math",
+  "difficulty": 2,
+  "tags": [
+    "number-theory",
+    "mod"
+  ],
+  "samples": [
+    {
+      "input": "2 10 1000\n",
+      "output": "24"
+    },
+    {
+      "input": "0 0 7\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

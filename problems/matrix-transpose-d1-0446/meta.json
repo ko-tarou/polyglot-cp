@@ -1,0 +1,23 @@
+{
+  "id": "matrix-transpose-d1-0446",
+  "title": "行列の転置",
+  "topic": "matrix",
+  "difficulty": 1,
+  "tags": [
+    "matrix"
+  ],
+  "samples": [
+    {
+      "input": "2 3\n1 2 3\n4 5 6\n",
+      "output": "1 4\n2 5\n3 6"
+    },
+    {
+      "input": "3 3\n-653 515 -351\n-99 -265 766\n633 12 -642\n",
+      "output": "-653 -99 633\n515 -265 12\n-351 766 -642"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

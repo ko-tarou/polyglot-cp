@@ -1,0 +1,23 @@
+{
+  "id": "count-words-d2-0322",
+  "title": "単語数を数える",
+  "topic": "string",
+  "difficulty": 2,
+  "tags": [
+    "parse"
+  ],
+  "samples": [
+    {
+      "input": "hello world\n",
+      "output": "2"
+    },
+    {
+      "input": "one\n",
+      "output": "1"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}

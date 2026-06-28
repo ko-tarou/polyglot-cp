@@ -1,0 +1,23 @@
+{
+  "id": "binary-search-d3-0346",
+  "title": "二分探索 (存在判定)",
+  "topic": "search",
+  "difficulty": 3,
+  "tags": [
+    "binary-search"
+  ],
+  "samples": [
+    {
+      "input": "3 2\n1 2 3\n",
+      "output": "Yes"
+    },
+    {
+      "input": "3 5\n1 2 3\n",
+      "output": "No"
+    }
+  ],
+  "num_samples": 2,
+  "num_hidden_tests": 5,
+  "reference_language": "python",
+  "reference_solution": "solution.py"
+}
