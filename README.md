@@ -62,41 +62,97 @@ npm run dev
 npm run build
 ```
 
-`tsc`（型チェック）+ `vite build` が通れば成功です。
+`tsc`（型チェック）+ `vite build` が通れば成功です。`build` の前段で
+`tools/build_static_problems.py` が走り、問題を静的 JSON 化します（Python 標準ライブラリのみ）。
+
+## 静的サイト構成（バックエンドなし）
+
+495 問の問題集と採点を **完全にフロントだけ** で動かします。
+
+### 問題集 = 静的アセット
+
+`tools/build_static_problems.py` が `problems/<id>/`（statement.md / meta.json / tests）を読み、
+
+- `public/problems/index.json` … ピッカー用の軽量リスト（id / title / topic / difficulty / tags）
+- `public/problems/<id>.json` … 問題全体（問題文 + 全テストケース。公開 2 + 非公開 5）
+
+に変換します。`public/` は Vite が `dist/` へそのままコピーするので、`dist/` を
+Vercel や GitHub Pages に置くだけで動きます。問題はピッカーで一覧・topic / difficulty / 検索で絞り込み、
+選択時に当該 `<id>.json` を遅延 fetch します（重い d4 問題のテスト入力を最初に読み込まないため）。
+
+注: 完全静的のため **非公開テストの入出力もクライアントに配信されます**（devtools で見えます）。
+自作練習サイトでは許容範囲ですが、本番のコンテストでは非公開テストはジャッジ API 側に隠してください。
+
+### コード実行 = どこまでブラウザだけで動くか
+
+| 実行系 | 対象言語 | 静的サイトで動くか |
+|---|---|---|
+| **Pyodide**（WASM 版 CPython・CDN から遅延ロード） | python | ○ 完全クライアント実行 |
+| **Web Worker**（ブラウザネイティブ JS） | javascript | ○ 完全クライアント実行 |
+| **Judge0 外部 API**（UI で URL/キーを設定・自前バックエンドではない） | ruby / perl / bash / swift / dart / go / c / cpp / rust / java / php / typescript / kotlin / scala / lua / csharp | △ 外部 Judge0 が必要 |
+| dev サーバー（`server/runner.ts`）のみ | zig | × Judge0 CE に Zig ランタイムが無く WASM も無いため、`npm run dev` のローカル実行専用 |
+
+つまり **python / javascript はホスティング先がどこでも追加サービス無しで完全に動き**（既定の rotation も
+この 2 言語なので、デプロイ直後から A+B などが採点できます）、それ以外は外部 Judge0 を UI で繋ぐと動きます。
+Judge0 設定（URL / RapidAPI キー / ホスト）は **localStorage のみに保存**され、バンドルにもコミットにも含まれません。
+
+### 実行エンジンの切り替え
+
+画面右上のセレクタで 2 モード:
+
+- **ブラウザ実行（静的・既定）**: Pyodide + JS Worker + Judge0。`dist` 配信でそのまま動く。
+- **ローカル dev サーバー**: `/api/run`（`server/runner.ts`）へ委譲。`npm run dev` 時のみ有効で、
+  この PC のツールチェーンを使って 13 言語をローカル実行できる（静的配信では `/api/run` が無いので動かない）。
+
+### GitHub Pages のサブパス対応
+
+ユーザー/組織サイトや Vercel は既定（`base='/'`）でそのまま。プロジェクトサイト
+（`https://user.github.io/<repo>/`）に置くときは `BASE_PATH=/<repo>/ npm run build` でビルドしてください。
 
 ## 構成
 
 ```
 polyglot-cp/
   index.html
-  vite.config.ts          # react + 実行エンジンプラグインを登録、.env を読む
+  vite.config.ts          # react + dev 実行エンジンプラグイン登録・base/.env を読む
+  tools/
+    build_static_problems.py  # problems/ -> public/problems/*.json （静的化・stdlibのみ）
   server/
-    runner.ts             # 実行エンジン: /api/run middleware, local/judge0, パイプライン, 判定
+    runner.ts             # dev サーバー実行エンジン: /api/run, local/judge0 パイプライン
   src/
-    main.tsx
-    App.tsx               # 画面全体・rotation バー・実行ボタン
-    problem.ts            # サンプル問題・既定言語・既定コード
-    types.ts              # レスポンス型 + languageForLines (rotation 計算)
+    App.tsx               # 画面全体・ピッカー/問題表示・rotation・エンジン切替・提出
+    problem.ts            # 既定コード・既定 rotation
+    problems.ts           # 静的カタログの fetch（index + 問題遅延ロード）
+    types.ts              # 共有型（Verdict / CaseResult / JudgeResult）+ rotation 計算
+    engine/
+      langs.ts            # 言語表（色/バッジ/担当エンジン/judge0Id）= 唯一の真実
+      index.ts            # 採点オーケストレータ（パイプライン + 全ケース判定）
+      pyodide.ts          # python: WASM ブラウザ実行
+      jsWorker.ts / js.ts # javascript: Web Worker 実行（TLE で terminate）
+      judge0.ts           # 外部 Judge0 への直接 fetch + 設定の localStorage 保存
     components/
+      ProblemPicker.tsx   # 一覧 + topic/difficulty/検索フィルタ
+      ProblemView.tsx     # 問題文（軽量 markdown レンダラ）
       CodeEditor.tsx      # gutter(行番号+言語バッジ) + textarea
+      ResultPanel.tsx     # overall verdict + ケースチップ + 各行中間出力
+      Judge0Settings.tsx  # Judge0 接続設定パネル
       LangBadge.tsx       # 言語バッジ
-      ResultPanel.tsx     # verdict + 各行中間出力
     index.css
 ```
 
-## 実装範囲（このPoCでできること）
+## 実装範囲（できること）
 
+- 495 問の問題ピッカー（topic / difficulty / 検索フィルタ）+ 問題文・サンプル表示
+- 提出を **全テストケース（公開 2 + 非公開 5）** に対して採点し、全 AC で AC（途中失敗で打ち切り）
 - 行ごとの言語ローテーション割り当て + 行単位の言語バッジ表示
-- 独立プロセスによる stdout -> stdin パイプライン実行（local: python3 / node）
-- 各行 5 秒タイムアウト・stderr / exit code / 実行時間の可視化
-- サンプル問題 1 問の AC / WA / RE / TLE 判定
-- Judge0 連携コード（`.env` でオプトイン）
+- 独立プロセスの stdout -> stdin パイプライン実行（python=Pyodide / javascript=JS Worker / その他=Judge0）
+- stderr / exit code / 実行時間・ケースごとの verdict 可視化
+- 完全静的ビルド（`vite build` -> `dist`）で Vercel / GitHub Pages にデプロイ可
 
 ## 次段に残したこと
 
-- Judge0 の実接続テスト（本 PoC ではコードのみ・キー未設定で未検証）
-- 対応言語の拡張（C / C++ / Go / Rust 等。`server/runner.ts` の `LANGS` と UI の `SUPPORTED_LANGUAGES` に追加）
-- 複数問題・問題管理（DB / 問題セット）とテストケース複数化
-- 本番グレードのサンドボックス（local 実行の置き換え）
+- Judge0 の実接続テスト（キー未設定のため未検証。CORS 許可が前提）
+- Python の TLE 強制中断（Pyodide はメインスレッド実行で hard-kill 不可。JS は Worker terminate 済み）
+- 非公開テストをクライアントに出さない構成（完全静的とのトレードオフ）
 - 提出履歴・順位表・複数ユーザー
 - エディタ強化（シンタックスハイライト・行ごとの言語手動上書き）
