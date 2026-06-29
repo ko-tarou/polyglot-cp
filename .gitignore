@@ -8,3 +8,7 @@ public/problems/
 .DS_Store
 .vite/
 __pycache__/
+# Playwright E2E artifacts
+test-results/
+playwright-report/
+.playwright/
