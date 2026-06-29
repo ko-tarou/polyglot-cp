@@ -1,0 +1,26 @@
+name: Tests
+
+# Fast unit checks on every push / PR. Kept separate from the Pages deploy
+# workflow so a red test never blocks an unrelated concern, and vice versa.
+# (Playwright E2E needs a browser download, so it stays a local `npm run
+# test:e2e` step rather than running here.)
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Vitest (core judge logic)
+        run: npm test
+      - name: Python (problem bundler)
+        run: python3 -m unittest tools.test_build_static_problems -v
