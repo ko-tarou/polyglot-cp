@@ -5,7 +5,10 @@
   "type": "module",
   "description": "PoC: a competitive-programming judge where each line of a submission runs in a different language, piped together",
   "scripts": {
+    "bundle-problems": "python3 tools/build_static_problems.py",
+    "predev": "npm run bundle-problems",
     "dev": "vite",
+    "prebuild": "npm run bundle-problems",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
