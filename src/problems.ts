@@ -42,6 +42,25 @@ export async function loadIndex(): Promise<IndexEntry[]> {
   return data.problems;
 }
 
+// Pure picker filter (topic / difficulty / free-text over title|id|tags).
+// Extracted from ProblemPicker so the selection logic is unit-testable without
+// rendering. An empty/whitespace filter value means "no constraint".
+export interface ProblemFilter {
+  topic?: string;
+  difficulty?: string;
+  query?: string;
+}
+
+export function filterProblems(index: IndexEntry[], { topic = '', difficulty = '', query = '' }: ProblemFilter): IndexEntry[] {
+  const q = query.trim().toLowerCase();
+  return index.filter((p) => {
+    if (topic && p.topic !== topic) return false;
+    if (difficulty && String(p.difficulty) !== difficulty) return false;
+    if (q && !(p.title.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.tags.some((t) => t.includes(q)))) return false;
+    return true;
+  });
+}
+
 const cache = new Map<string, ProblemData>();
 
 export async function loadProblem(id: string): Promise<ProblemData> {

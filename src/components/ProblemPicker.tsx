@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { IndexEntry } from '../problems';
+import { filterProblems, type IndexEntry } from '../problems';
 
 interface Props {
   index: IndexEntry[];
@@ -18,15 +18,7 @@ export function ProblemPicker({ index, selectedId, onSelect }: Props) {
 
   const topics = useMemo(() => Array.from(new Set(index.map((p) => p.topic))).sort(), [index]);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return index.filter((p) => {
-      if (topic && p.topic !== topic) return false;
-      if (difficulty && String(p.difficulty) !== difficulty) return false;
-      if (q && !(p.title.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.tags.some((t) => t.includes(q)))) return false;
-      return true;
-    });
-  }, [index, topic, difficulty, query]);
+  const filtered = useMemo(() => filterProblems(index, { topic, difficulty, query }), [index, topic, difficulty, query]);
 
   return (
     <div className="picker">
