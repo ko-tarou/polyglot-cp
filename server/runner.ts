@@ -6,8 +6,10 @@
 // the last stdout is the answer that gets judged.
 //
 // Two engines:
-//   - local  (keyless, default): runs python3 / node as short-lived processes
-//            on THIS machine, one per line, with a hard 5s timeout each.
+//   - local  (keyless, default): runs each line as a short-lived process on THIS
+//            machine (python3/node/ruby/perl/bash/swift/dart/go/zig + compiled
+//            c/c++/rust/java), one per line, with a hard 5s timeout each
+//            (compiled langs get a separate 5s budget for the compile step).
 //   - judge0 (opt-in via .env):  delegates each line to a Judge0 API instance.
 //
 // SECURITY: the local engine runs your own code on your own machine. It is a PoC
@@ -28,15 +30,45 @@ export interface RunnerConfig {
 
 interface LangSpec {
   ext: string;
-  cmd: (file: string) => [string, string[]];
-  judge0Id: number;
+  file?: string; // source filename override (e.g. Java needs Main.java)
+  // run: how to execute the source/binary. Omit = no local runtime (Judge0 only).
+  run?: (src: string, dir: string) => [string, string[]];
+  // compile: optional build step that must succeed before run (a.out etc.).
+  compile?: (src: string, dir: string) => [string, string[]];
+  // Judge0 CE language_id. Omit when Judge0 CE has no runtime (e.g. Zig = local only).
+  judge0Id?: number;
 }
 
-// Only languages that are guaranteed present on this machine are wired for the
-// local engine. Add more here (and map a judge0Id) to extend the rotation.
+const bin = (dir: string) => join(dir, 'a.out');
+
+// Language table. `run` present => runnable by the local keyless engine (the
+// command is detected on this machine). `run` absent => Judge0-only (the runtime
+// is not installed locally; enable USE_JUDGE0 to execute it). judge0Id maps to a
+// Judge0 CE language_id; entries without one are local-only (no Judge0 CE runtime).
 const LANGS: Record<string, LangSpec> = {
-  python: { ext: 'py', cmd: (f) => ['python3', [f]], judge0Id: 71 },
-  javascript: { ext: 'js', cmd: (f) => ['node', [f]], judge0Id: 63 },
+  // --- interpreted / single-command (compile happens inside the run command) ---
+  python: { ext: 'py', run: (f) => ['python3', [f]], judge0Id: 71 },
+  javascript: { ext: 'js', run: (f) => ['node', [f]], judge0Id: 63 },
+  ruby: { ext: 'rb', run: (f) => ['ruby', [f]], judge0Id: 72 },
+  perl: { ext: 'pl', run: (f) => ['perl', [f]], judge0Id: 85 },
+  bash: { ext: 'sh', run: (f) => ['bash', [f]], judge0Id: 46 },
+  swift: { ext: 'swift', run: (f) => ['swift', [f]], judge0Id: 83 },
+  dart: { ext: 'dart', run: (f) => ['dart', [f]], judge0Id: 90 },
+  go: { ext: 'go', run: (f) => ['go', ['run', f]], judge0Id: 60 },
+  // zig compiles+runs in one command (like `go run`); Judge0 CE has no Zig, so local only.
+  zig: { ext: 'zig', run: (f) => ['zig', ['run', f]] },
+  // --- compiled: build to a.out (or .class), then run the artifact ---
+  c: { ext: 'c', compile: (f, d) => ['gcc', [f, '-O2', '-w', '-o', bin(d)]], run: (_f, d) => [bin(d), []], judge0Id: 50 },
+  cpp: { ext: 'cpp', compile: (f, d) => ['g++', [f, '-O2', '-w', '-std=c++17', '-o', bin(d)]], run: (_f, d) => [bin(d), []], judge0Id: 54 },
+  rust: { ext: 'rs', compile: (f, d) => ['rustc', [f, '-O', '-o', bin(d)]], run: (_f, d) => [bin(d), []], judge0Id: 73 },
+  java: { ext: 'java', file: 'Main.java', compile: (f, d) => ['javac', ['-d', d, f]], run: (_f, d) => ['java', ['-cp', d, 'Main']], judge0Id: 62 },
+  // --- Judge0-only: runtime not installed locally (set USE_JUDGE0=true) ---
+  php: { ext: 'php', judge0Id: 68 },
+  typescript: { ext: 'ts', judge0Id: 74 },
+  kotlin: { ext: 'kt', judge0Id: 78 },
+  scala: { ext: 'scala', judge0Id: 81 },
+  lua: { ext: 'lua', judge0Id: 64 },
+  csharp: { ext: 'cs', judge0Id: 51 },
 };
 
 const TIMEOUT_MS = 5000;
@@ -49,20 +81,11 @@ interface ExecResult {
   durationMs: number;
 }
 
-function runOneLocal(language: string, code: string, input: string): Promise<ExecResult> {
+// Spawn one short-lived process with a hard timeout. input=null => no stdin.
+function spawnOnce(cmd: string, args: string[], input: string | null): Promise<ExecResult> {
   return new Promise((resolve) => {
-    const spec = LANGS[language];
     const start = Date.now();
-    if (!spec) {
-      resolve({ stdout: '', stderr: `Unsupported language: ${language}`, exitCode: null, timedOut: false, durationMs: 0 });
-      return;
-    }
-    const dir = mkdtempSync(join(tmpdir(), 'pcp-'));
-    const file = join(dir, `main.${spec.ext}`);
-    writeFileSync(file, code);
-    const [cmd, args] = spec.cmd(file);
     const child = spawn(cmd, args, { stdio: ['pipe', 'pipe', 'pipe'] });
-
     let stdout = '';
     let stderr = '';
     let timedOut = false;
@@ -76,18 +99,47 @@ function runOneLocal(language: string, code: string, input: string): Promise<Exe
     child.stdin.on('error', () => {});
     child.on('error', (e) => {
       clearTimeout(timer);
-      rmSync(dir, { recursive: true, force: true });
       resolve({ stdout: '', stderr: String(e), exitCode: null, timedOut: false, durationMs: Date.now() - start });
     });
     child.on('close', (exitCode) => {
       clearTimeout(timer);
-      rmSync(dir, { recursive: true, force: true });
       resolve({ stdout, stderr, exitCode, timedOut, durationMs: Date.now() - start });
     });
 
-    child.stdin.write(input);
+    if (input !== null) child.stdin.write(input);
     child.stdin.end();
   });
+}
+
+// Run one line locally: write the source, optionally compile (own 5s budget),
+// then execute (own 5s budget) with `input` piped to stdin. Temp dir always cleaned.
+async function runOneLocal(language: string, code: string, input: string): Promise<ExecResult> {
+  const spec = LANGS[language];
+  if (!spec) {
+    return { stdout: '', stderr: `Unsupported language: ${language}`, exitCode: null, timedOut: false, durationMs: 0 };
+  }
+  if (!spec.run) {
+    return { stdout: '', stderr: `No local runtime for "${language}". Set USE_JUDGE0=true to run it via Judge0.`, exitCode: null, timedOut: false, durationMs: 0 };
+  }
+  const dir = mkdtempSync(join(tmpdir(), 'pcp-'));
+  try {
+    const src = join(dir, spec.file ?? `main.${spec.ext}`);
+    writeFileSync(src, code);
+    if (spec.compile) {
+      const [cc, cargs] = spec.compile(src, dir);
+      const comp = await spawnOnce(cc, cargs, null);
+      if (comp.timedOut) {
+        return { ...comp, stderr: `Compilation timed out:\n${comp.stderr}` };
+      }
+      if (comp.exitCode !== 0) {
+        return { stdout: '', stderr: comp.stderr || 'Compilation failed', exitCode: comp.exitCode ?? 1, timedOut: false, durationMs: comp.durationMs };
+      }
+    }
+    const [rc, rargs] = spec.run(src, dir);
+    return await spawnOnce(rc, rargs, input);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 }
 
 const b64 = (s: string) => Buffer.from(s, 'utf8').toString('base64');
@@ -98,6 +150,9 @@ async function runOneJudge0(language: string, code: string, input: string, confi
   const start = Date.now();
   if (!spec) {
     return { stdout: '', stderr: `Unsupported language: ${language}`, exitCode: null, timedOut: false, durationMs: 0 };
+  }
+  if (spec.judge0Id == null) {
+    return { stdout: '', stderr: `"${language}" is not available on Judge0 CE; run it locally (USE_JUDGE0=false).`, exitCode: null, timedOut: false, durationMs: 0 };
   }
   try {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };

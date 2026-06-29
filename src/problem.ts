@@ -1,31 +1,18 @@
-export interface Problem {
-  id: string;
-  title: string;
-  statement: string;
-  input: string;
-  expected: string;
-}
+// Starter submission shown when the app loads. The default rotation (python ->
+// javascript) is fully static: line 1 runs in Pyodide, line 2 in the JS worker,
+// line 3 back in Pyodide - no external services needed.
+//
+// Problems themselves now come from the static catalog (src/problems.ts); this
+// file only holds the editor's initial code + rotation.
 
-// One bundled sample problem for the PoC.
-export const SAMPLE_PROBLEM: Problem = {
-  id: 'double',
-  title: 'Double N',
-  statement: '整数 N が 1 行で与えられる。N を 2 倍した値を出力せよ。',
-  input: '5\n',
-  expected: '10',
-};
-
-// Default rotation cycle. Extend this list to add more languages to the cycle.
 export const DEFAULT_LANGUAGES = ['python', 'javascript'];
 
-export const SUPPORTED_LANGUAGES = ['python', 'javascript'];
-
-// Default solution: 3 lines that demonstrate the rotation cycling back to Python.
-//   line 1 (python)     : read N, echo it through
-//   line 2 (javascript) : read N, output N * 2
-//   line 3 (python)     : read the value, echo it as the final answer
+// A + B starter (the default selected problem is the first math problem):
+//   line 1 (python)     : read "A B", print them back unchanged
+//   line 2 (javascript) : read "A B", print A + B
+//   line 3 (python)     : echo the answer as the final output
 export const DEFAULT_CODE = [
-  'print(input())',
-  "const n = Number(require('fs').readFileSync(0, 'utf8').trim()); console.log(n * 2);",
+  'import sys; print(sys.stdin.read().strip())',
+  "const [a,b]=require('fs').readFileSync(0,'utf8').trim().split(/\\s+/).map(Number); console.log(a+b);",
   'print(input())',
 ].join('\n');

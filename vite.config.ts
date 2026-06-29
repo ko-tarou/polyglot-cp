@@ -7,6 +7,9 @@ export default defineConfig(({ mode }) => {
   // Load .env (all keys, no VITE_ prefix filter) for the dev-server runner.
   const env = loadEnv(mode, process.cwd(), '');
   return {
+    // Set BASE_PATH=/<repo>/ for GitHub Pages project sites; default '/' suits
+    // Vercel and user/org Pages. import.meta.env.BASE_URL flows to asset fetches.
+    base: env.BASE_PATH || '/',
     plugins: [
       react(),
       runnerPlugin({
