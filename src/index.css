@@ -21,14 +21,282 @@ body {
 }
 
 .app {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1.2rem 1.5rem 2rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .app-header h1 {
   margin: 0;
   font-size: 1.6rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mode-select,
+.picker-filters select,
+.picker-search,
+.judge0-panel input {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.82rem;
+}
+
+/* Two-column workspace: problem catalog sidebar + main workspace */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Problem picker */
+.picker {
+  display: flex;
+  flex-direction: column;
+  max-height: 78vh;
+}
+
+.picker-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.picker-filters select {
+  display: flex;
+}
+
+.picker-count {
+  padding: 0.35rem 0.6rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.45rem 0.6rem;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.picker-item:hover {
+  background: #1c2230;
+}
+
+.picker-item.selected {
+  background: #1f6feb33;
+  border-left: 3px solid var(--accent);
+}
+
+.picker-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+}
+
+.picker-topic {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.picker-diff {
+  color: #d29922;
+  font-size: 0.7rem;
+}
+
+/* Problem view (rendered statement) */
+.problem-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.78rem;
+  margin-bottom: 0.6rem;
+}
+
+.problem-topic {
+  color: var(--accent);
+}
+
+.problem-diff {
+  color: #d29922;
+}
+
+.problem-statement {
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.md-h {
+  font-size: 1rem;
+  margin: 0.8rem 0 0.3rem;
+}
+
+.problem-statement h2.md-h {
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+.md-p {
+  margin: 0.4rem 0;
+}
+
+.md-ul {
+  margin: 0.3rem 0;
+  padding-left: 1.2rem;
+}
+
+.md-code {
+  margin: 0.3rem 0;
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* Case chips + score */
+.score {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.case-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.case-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  color: var(--text);
+}
+
+.case-chip.active {
+  background: #1c2230;
+}
+
+.case-verdict {
+  font-weight: 700;
+}
+
+.pane-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.run-btn.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* Judge0 settings */
+.judge0 {
+  position: relative;
+}
+
+.judge0-toggle {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.judge0-panel {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  z-index: 10;
+  width: 320px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 8px 24px #0008;
+}
+
+.judge0-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.judge0-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.small {
+  font-size: 0.72rem;
 }
 
 .tagline {
